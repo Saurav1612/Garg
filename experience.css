@@ -1,0 +1,28 @@
+body {
+  background-color: powderblue;
+  background-image: url('code.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  opacity: 1
+}
+.skills{
+  margin-top: 2%;
+ margin-left: 2%;
+ font-weight: bold;
+ font-size: 30px;
+ color: #ABB1B5  ;
+}
+.one{
+  font-weight: bold;
+  color: #900C3F;
+ font-size: 50px;
+ text-align: center;
+}
+.items{
+  margin-top: 2%;
+ margin-left: 25%;
+ font-weight: bold;
+ font-size: 70px;
+ color:#008000;  ;
+}
