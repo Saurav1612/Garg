@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Weather</title>
+<link rel="shortcut icon" href="favicon.ico" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container-fluid">
+<div class="row" style="background-color: #00FF00;">
+<div class="col-lg-3">
+
+</div>
+<div class="col-lg-6">
+<span style="font-size:500%;color:white;"><center>Weather.</center></span></h1>
+</div>
+<div class="col-lg-3">
+<img src="laval.jpg" class="img-circle" alt="icon" width="150" height="120">
+</div>
+</div>
+</div>
+<div class="container">
+<div class="row">
+<h3 class="text-center text-primary"style="font-size:200%;">Enter City Name</h3>
+<center>
+<span id="error"></span>
+<div class="form-group form-inline ">
+<input type="text" name="city" id="city" class="form-control" placeholder="City name"autofocus>
+<button id="submitweather" class="btn btn-primary">Search city</button>
+</div></center>
+</div>
+<div class="row">
+<div class="col-lg-12">
+<div id="show"></div>
+</div>
+</div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+$("#submitweather").click(function(){
+var city = $("#city").val();
+if(city!=''){
+$.ajax({
+url:'http://api.openweathermap.org/data/2.5/weather?q='+city+'&appid=98d46ba8691414e03eeb2224dd084c7a&units=metric',
+type:"GET",
+dataType:"jsonp",
+success:function(data){
+var wiget=show(data);
+$("#show").html(wiget);
+$("#show").val('');
+}
+});
+}
+else
+{
+$("#error").html('<div class="alert alert-danger alert-dismissable" id="errorcity"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Field cannot be empty!!</div>');
+}
+});
+});
+function show(data){
+return "<div class='alert alert-success alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"+
+"<h3 style='font-size:35px;font-weight:bold;'>Current Weather for "+data.name+", "+data.sys.country +"</h3>"+
+"<h3><strong>Weather</strong>: <img src='http://openweathermap.org/img/w/"+data.weather[0].icon+".png'> "+data.weather[0].main+"</h3>"+
+"<h3><strong>Description</strong>: "+data.weather[0].description+"</h3>"+
+"<h3><strong>Temprature</strong>: "+data.main.temp+"&deg;C</h3>"+
+"<h3><strong>Pressure</strong>: "+data.main.pressure+"hPa</h3>"+
+"<h3><strong>Humidity</strong>: "+data.main.humidity+"%</h3>"+
+"<h3><strong>Wind Speed</strong>: "+data.wind.speed+"m/sec</h3>"+
+"<h3><strong>Wind Direction</strong>: "+data.wind.deg+"&deg;</h3></div>"
+//map api AIzaSyC-FHpkFWtbzM4eAnl5JkQIdUbTdIctGIg
+}
+</script>
+</body>
+</html>
